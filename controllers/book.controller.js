@@ -1,19 +1,21 @@
 const Book = require("../models/book");
 
 const addNewBook=async (req,res,next)=>{
-const {title,author,price}=req.body;
-if(!title||!author||!price){
-    return res.status(400).json({"message":"there is a missing values "})
-}
-const newBook=new Book({title,author,price})
+    try{
+const {title,author,price,rate}=req.body;
+
+const newBook=new Book({title,author,price,rate})
 
 await newBook.save()
 
 res.status(201).json({"message":"book added succeffully" ,"data": newBook})
+    }catch(err){
+        res.status(401).json({"message":"there was an error" ,error:err.message})
+    }
 }
 
 
-const getBookById=async (req,res,next)=>{
+const getBookById=async (req,res,next)=>{ 
 const {id}=req.params
 
 if(!id){
@@ -32,6 +34,21 @@ res.status(400).json({"message":"there is an error","error":err.message})
 
 }
 
+const getTopRatedBooks=async (req,res,next)=>{
+
+    try{
+ const topRatedBooks = await Book.find({ rate: { $gt: 3 } });
+
+
+res.status(200).json({"message":"books geted succsffully","data":topRatedBooks})
+    }catch(err){
+        res.status(400).json({"message":"there is an error","error":err.message})
+    }
+
+
+
+}
+
 module.exports={
-    addNewBook,getBookById
+    addNewBook,getBookById,getTopRatedBooks
 }

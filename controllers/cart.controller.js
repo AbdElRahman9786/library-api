@@ -19,7 +19,8 @@ const getcartdata= async (req, res) => {
 
 const addbooktocart=async (req,res,next)=>{
  const userId = req.user.id; 
- const { bookId, quantity } = req.body;
+  const  quantity = 1  
+ const { bookId } = req.body;
  let cart = await Cart.findOne({ userId });
 
   if (!cart) {

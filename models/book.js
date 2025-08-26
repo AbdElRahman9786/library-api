@@ -13,10 +13,16 @@ const bookSchema = new mongoose.Schema({
   price:{
     type: Number,
     required: true
+  },
+  rate:{
+    type:Number,
+    required:true,
+    max:5,
+    min:1
   }
   
  
-});
+}); 
 
 const Book = mongoose.model('Book', bookSchema);
 

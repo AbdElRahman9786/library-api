@@ -1,5 +1,6 @@
 const express=require('express')
 const app=express()
+var cors = require('cors')
 const mongoose = require('mongoose');
 const userRouter=require('./routers/userRouter')
 const cartRouter=require('./routers/cart.Router')
@@ -19,6 +20,7 @@ async function connectDB() {
         console.error("MongoDB connection error:", error);
     }
 }
+app.use(cors())
 connectDB();
 app.use(express.json());
 app.use(userRouter)
