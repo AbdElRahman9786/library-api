@@ -1,8 +1,19 @@
+const multer = require("multer");
 const Book = require("../models/book");
 
+
+const getAllBooks=async (req,res,next)=>{
+    try{
+const books=await Book.find({})
+res.status(200).json({"message":"books geted successfully","data":books})
+    }catch(err){
+        res.status(400).json({"message":"there is an error","error":err.message})
+    }
+}
 const addNewBook=async (req,res,next)=>{
     try{
 const {title,author,price,rate}=req.body;
+const {image}=req.file;
 
 const newBook=new Book({title,author,price,rate})
 
@@ -50,5 +61,5 @@ res.status(200).json({"message":"books geted succsffully","data":topRatedBooks})
 }
 
 module.exports={
-    addNewBook,getBookById,getTopRatedBooks
+    addNewBook,getBookById,getTopRatedBooks,getAllBooks
 }

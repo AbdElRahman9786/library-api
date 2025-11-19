@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const User=require('./user')
+
 const bookSchema = new mongoose.Schema({
   title: {
     type: String,
