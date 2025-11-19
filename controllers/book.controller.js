@@ -13,9 +13,9 @@ res.status(200).json({"message":"books geted successfully","data":books})
 const addNewBook=async (req,res,next)=>{
     try{
 const {title,author,price,rate}=req.body;
-const {image}=req.file;
+const image=req.file;
 
-const newBook=new Book({title,author,price,rate})
+const newBook=new Book({title,author,price,rate, ImageUrl:image.path})
 
 await newBook.save()
 

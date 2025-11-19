@@ -1,5 +1,6 @@
 const express=require('express')
 const app=express()
+const path = require('path');
 var cors = require('cors')
 const mongoose = require('mongoose');
 const userRouter=require('./routers/userRouter')
@@ -52,6 +53,7 @@ app.use(cors())
 connectDB();
 app.use(express.json());
 app.use(multer({storage:storage,fileFilter}).single('image'))
+app.use('/images',express.static(path.join(__dirname,'images')))
 app.use(userRouter)
 app.use(cartRouter)
 app.use(bookRouter)

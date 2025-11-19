@@ -19,6 +19,10 @@ const bookSchema = new mongoose.Schema({
     required:true,
     max:5,
     min:1
+  },
+  ImageUrl:{
+    type:String,
+    required:true
   }
   
  
